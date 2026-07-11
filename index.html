@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tax Invoice – A&S Engineering Services</title>
+  <meta name="description" content="Tax Invoice for A&S Engineering Services, Singrauli MP.">
+  <link rel="icon" type="image/png" href="Anslogo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="invoice-container">
+
+    <!-- ═══ HEADER ═══ -->
+    <div class="header">
+      <img src="Anslogo.png" id="logo" alt="A&S Logo">
+      <div class="company-info">
+        <h1>A&amp;S ENGINEERING SERVICES</h1>
+        <p>ADD-WARD NO 12, SAHOKHAR, KHUTAR, POST -KHUTAR, WAIDHAN SINGRAULI (MP)</p>
+        <p>PIN CODE 486886 &nbsp;|&nbsp; PH: 7974694107 &nbsp;|&nbsp; Email: A&amp;Sengineering.wn24@gmail.com</p>
+      </div>
+    </div>
+
+    <!-- ═══ TAX INVOICE BAND ═══ -->
+    <div class="quotation">
+      <h2 id="h2">TAX INVOICE</h2>
+      <hr id="quotation_bottum_line">
+    </div>
+
+    <!-- ═══ REF / DATE ═══ -->
+    <div class="quotation-info">
+      <p>REF. NO :&nbsp;<input type="text" placeholder="EE/VJ/APRL-2024/01" id="ref"></p>
+      <p>Date:&nbsp;<input id="date" type="date"></p>
+    </div>
+    <div class="doc-no-row">
+      <p>Doc. No :&nbsp;<input type="text" placeholder="DOC-001" id="docNo"></p>
+    </div>
+
+    <!-- ═══ CUSTOMER INFO ═══ -->
+    <div class="customer-info">
+      <textarea id="customer-info" name="customerDetails"
+        placeholder="Enter Customer Details: Name, Address, GSTIN, etc."
+        required oninput="autoGrow(this)"></textarea>
+    </div>
+
+    <!-- ═══ ITEMS TABLE ═══ -->
+    <table class="quotation-table">
+      <thead>
+        <tr>
+          <th>Sr. No.</th>
+          <th>Description of Goods / Services</th>
+          <th>HSN CODE</th>
+          <th id="qty">Qty.</th>
+          <th id="unitPrice">Unit Price (₹)</th>
+          <th>Amount (₹)</th>
+        </tr>
+      </thead>
+      <tbody id="quotation-body">
+        <tr>
+          <td>1</td>
+          <td contenteditable="true">VAJRA ROCK BREAKER HD+ WITH PIPELINE AND ALL ASSOSEEERASE.</td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true" oninput="calculateTotal()">1</td>
+          <td contenteditable="true" oninput="calculateTotal()"></td>
+          <td class="totalAmount">0.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ═══ BUTTONS ═══ -->
+    <div class="button-container">
+      <button id="btns" class="add-row-btn" onclick="addRow()">+ Add Row</button>
+      <button id="btns" class="remove-row-btn" onclick="removeRow()">− Remove Row</button>
+      <button id="btns" class="print-btn" onclick="window.print()">🖨 Print</button>
+    </div>
+
+    <!-- ═══ TOTALS SECTION ═══ -->
+    <div class="totals">
+      <div class="warranty">
+        <textarea id="Warranty"
+          placeholder="WARRANTY: One Year only. Warranty claim will be made only on manufacturing default."></textarea>
+      </div>
+      <div class="amounts">
+        <p>
+          <pre id="sub">Sub Total: </pre>
+          <span id="subTotal">0.00</span>
+        </p>
+        <p>
+          <span>CGST: <input type="number" id="cgstRate" value="9" oninput="calculateTotal()" class="GST"> %</span>
+          <span>₹ <span id="cgstAmount">0.00</span></span>
+        </p>
+        <p>
+          <span>SGST: <input type="number" id="sgstRate" value="9" oninput="calculateTotal()" class="GST"> %</span>
+          <span>₹ <span id="sgstAmount">0.00</span></span>
+        </p>
+
+        <hr id="grand_total">
+        <p>
+          <span>Grand Total:</span>
+          <strong>₹ <span id="grandTotal">0.00</span></strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- ═══ SIGNATURE ═══ -->
+    <div class="signature-container">
+      <div class="signature">
+        <p>For; A&amp;S ENGINEERING SERVICES</p>
+        <img id="singh" src="singh.png" alt="Authorized Signatory">
+        <p>Stamp / Authorized Signatory</p>
+      </div>
+      <div id="gst_no">
+        <p>GST No : 23CXLPD3404M1ZL</p>
+        <p>PAN No : CXLPD3404M</p>
+      </div>
+    </div>
+
+    <hr id="footer_line">
+
+    <!-- ═══ TERMS & CONDITIONS ═══ -->
+    <div class="footer">
+      <ol id="Termscoditons">
+        <h4>Terms &amp; Conditions:</h4>
+        <li>Taxes as stated, all other taxes and changes in tax structure by Government will be applicable at the time of billing.</li>
+        <li>Freight &amp; Insurance: From Waidhan, Singrauli (MP) to the site, both to be borne by the customer.</li>
+        <li>Delivery within 1-2 weeks from the date of receipt of DO, purchase order and full payment.</li>
+        <li>Our offer is valid for 15 days from the date mentioned above; prices ruling at the time of delivery shall be applicable.</li>
+        <li>100% Payment to be released prior to dispatch of equipment.</li>
+        <li>PAN No. &amp; GST No. is required at the time of placement of order as per Govt. Rules.</li>
+        <li>Any dispute or claims out of this invoice will be subjected to the jurisdiction of court in Singrauli.</li>
+      </ol>
+    </div>
+
+    <!-- ═══ PAYMENT FOOTER ═══ -->
+    <div class="payment-footer">
+      <div class="payment-info">
+        <p class="pf-heading">Payment Info:</p>
+        <p><span class="pf-label">Beneficiary Name :</span> A&amp;S ENGINEERING SERVICES</p>
+        <p><span class="pf-label">Bank Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span> UNION BANK OF INDIA</p>
+        <p><span class="pf-label">Account Number :</span> 452501010033664</p>
+        <p><span class="pf-label">Branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span> SANJAY NAGAR, SINGRAULI</p>
+        <p><span class="pf-label">IFSC Code &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span> UBIN0545252</p>
+      </div>
+      <div class="payment-accent">
+        <div class="pa-stripe pa-stripe-1"></div>
+        <div class="pa-stripe pa-stripe-2"></div>
+        <div class="pa-contact">
+          <p>📧 A&amp;Sengineering.wn24@gmail.com</p>
+          <p>📞 7974694107</p>
+          <p>GST : 23CXLPD3404M1ZL</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.invoice-container -->
+
+  <script src="script.js"></script>
+  <script>
+    function autoGrow(element) {
+      element.style.height = "5px";
+      element.style.height = (element.scrollHeight) + "px";
+    }
+  </script>
+</body>
+</html>

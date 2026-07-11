@@ -1,0 +1,573 @@
+/** @format */
+/* =============================================
+   TAX INVOICE – Professional A4 Layout
+   A&S Engineering Services
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ─── Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 13px;
+  background: #e8eaf0;
+  color: #111;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0 40px;
+}
+
+/* ─── Page / A4 Container ─── */
+.invoice-container {
+  width: 210mm;
+  min-height: 297mm;
+  background: #fff;
+  border: 1px solid #bbb;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+  padding: 10mm 12mm 10mm 12mm;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* ─── Header ─── */
+.header {
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid #0d3b7a;
+  padding-bottom: 8px;
+  margin-bottom: 6px;
+  gap: 12px;
+}
+
+#logo {
+  height: 56px;
+  width: auto;
+  mix-blend-mode: multiply;
+  flex-shrink: 0;
+}
+
+.company-info {
+  flex: 1;
+  text-align: center;
+}
+
+.company-info h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0d3b7a;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.company-info p {
+  font-size: 11px;
+  color: #333;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ─── TAX INVOICE Title Band ─── */
+.quotation {
+  background: #0d3b7a;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  margin: 6px 0;
+}
+
+#h2 {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+#quotation_bottum_line { display: none; }
+
+/* ─── Ref / Date Row ─── */
+.quotation-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 2px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.doc-no-row {
+  padding: 4px 2px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 5px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.doc-no-row input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #111;
+}
+
+.quotation-info input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #111;
+}
+
+#date {
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-family: inherit;
+}
+
+#ref {
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+/* ─── Customer Info ─── */
+.customer-info {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  padding: 4px 8px;
+  margin-bottom: 6px;
+  background: #f9fafc;
+}
+
+#customer-info {
+  width: 100%;
+  height: 68px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 12px;
+  resize: none;
+  overflow: hidden;
+  outline: none;
+  color: #222;
+}
+
+/* ─── Items Table ─── */
+.quotation-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0;
+  font-size: 12px;
+}
+
+.quotation-table thead tr {
+  background: #0d3b7a;
+  color: #fff;
+}
+
+.quotation-table th {
+  border: 1px solid #0d3b7a;
+  padding: 7px 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.quotation-table td {
+  border: 1px solid #bbb;
+  padding: 6px 8px;
+  vertical-align: middle;
+  font-size: 12px;
+}
+
+.quotation-table tbody tr:nth-child(even) {
+  background: #f4f7fb;
+}
+
+.quotation-table td:nth-child(1) { text-align: center; width: 36px; }
+.quotation-table td:nth-child(3) { text-align: center; width: 70px; }
+.quotation-table td:nth-child(4) { text-align: center; width: 44px; }
+.quotation-table td:nth-child(5) { text-align: right; width: 80px; }
+.quotation-table td:nth-child(6) { text-align: right; width: 80px; }
+.totalAmount { font-weight: 600; }
+
+.quotation-table input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+/* ─── Action Buttons ─── */
+.button-container {
+  display: flex;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+#btns {
+  height: 34px;
+  padding: 0 16px;
+  background: #0d3b7a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.2s;
+}
+
+#btns:hover {
+  background: #1756b3;
+}
+
+/* ─── Totals Section ─── */
+.totals {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid #bbb;
+  margin-bottom: 0;
+}
+
+.warranty {
+  flex: 1.2;
+  padding: 8px;
+  border-right: 1.5px solid #bbb;
+  min-height: 110px;
+}
+
+#Warranty {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 500;
+  resize: none;
+  overflow: hidden;
+  outline: none;
+  color: #333;
+  line-height: 1.5;
+}
+
+.amounts {
+  flex: 0.8;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.amounts p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  padding: 2px 0;
+  gap: 8px;
+}
+
+#sub {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: pre;
+}
+
+#subTotal {
+  font-weight: 700;
+}
+
+.GST {
+  background: transparent;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  width: 44px;
+  text-align: center;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 1px 3px;
+}
+
+.gst-inline {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.gst-amt {
+  font-weight: 700;
+  min-width: 52px;
+  text-align: right;
+  display: inline-block;
+}
+
+#grand_total {
+  border: none;
+  border-top: 2px solid #0d3b7a;
+  margin: 4px 0;
+}
+
+.amounts p:last-child {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0d3b7a;
+}
+
+/* ─── Signature Row ─── */
+.signature-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border: 1px solid #bbb;
+  border-top: none;
+  padding: 8px 12px;
+}
+
+.signature {
+  text-align: left;
+}
+
+.signature p {
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+#singh {
+  height: 46px;
+  width: 140px;
+  display: block;
+  margin-top: 4px;
+}
+
+#gst_no {
+  text-align: right;
+}
+
+#gst_no p {
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+/* ─── Footer Line ─── */
+#footer_line {
+  border: none;
+  border-top: 2.5px solid #0d3b7a;
+  margin: 8px 0 4px;
+}
+
+/* ─── Terms & Conditions ─── */
+.footer {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 4px;
+}
+
+#Termscoditons {
+  padding-left: 16px;
+  color: #c0392b;
+}
+
+#Termscoditons h4 {
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  margin-bottom: 3px;
+  color: #c0392b;
+  letter-spacing: 0.3px;
+}
+
+#Termscoditons li {
+  font-size: 10.5px;
+  color: #c0392b;
+  margin-bottom: 2px;
+  line-height: 1.45;
+}
+
+/* ─── Payment Footer ─── */
+.payment-footer {
+  display: flex;
+  align-items: stretch;
+  margin-top: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #0d3b7a;
+  min-height: 72px;
+}
+
+.payment-info {
+  flex: 1.4;
+  padding: 10px 14px;
+  background: #fff;
+}
+
+.pf-heading {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0d3b7a;
+  text-decoration: underline;
+  margin-bottom: 5px;
+  letter-spacing: 0.3px;
+}
+
+.payment-info p {
+  font-size: 10.5px;
+  color: #222;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.pf-label {
+  font-weight: 600;
+  color: #0d3b7a;
+}
+
+.payment-accent {
+  flex: 0.8;
+  background: #0d3b7a;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.pa-stripe {
+  position: absolute;
+  top: -20px;
+  bottom: -20px;
+  width: 28px;
+  background: rgba(212, 175, 55, 0.55);
+  transform: rotate(-18deg);
+  border-radius: 2px;
+}
+
+.pa-stripe-1 { left: 12px; }
+.pa-stripe-2 { left: 46px; background: rgba(212, 175, 55, 0.3); }
+
+.pa-contact {
+  position: relative;
+  z-index: 1;
+  text-align: right;
+  padding: 10px 14px;
+}
+
+.pa-contact p {
+  font-size: 10px;
+  font-weight: 600;
+  color: #e8eaf0;
+  line-height: 1.8;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+/* ─── Misc ─── */
+h4 { text-decoration: underline; }
+
+textarea { overflow: hidden; resize: none; }
+
+/* ─── PRINT STYLES ─── */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm;
+  }
+
+  body {
+    background: #fff;
+    padding: 0;
+    margin: 0;
+  }
+
+  .invoice-container {
+    width: 100%;
+    min-height: auto;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .button-container { display: none !important; }
+
+  #btns { display: none !important; }
+
+  .GST {
+    border: none;
+    font-weight: 700;
+  }
+
+  .quotation-table input { background: transparent; }
+
+  #customer-info, #Warranty { background: transparent; }
+
+  /* Force background colors for print */
+  .quotation-table thead tr {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: #0d3b7a !important;
+    color: #fff !important;
+  }
+
+  .quotation {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: #0d3b7a !important;
+    color: #fff !important;
+  }
+
+  .quotation-table tbody tr:nth-child(even) {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: #f4f7fb !important;
+  }
+}
+
+/* ─── Responsive (screen only) ─── */
+@media screen and (max-width: 820px) {
+  body { padding: 8px 0 24px; }
+
+  .invoice-container {
+    width: 100%;
+    min-height: auto;
+    padding: 8px;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .company-info h1 { font-size: 16px; }
+  .company-info p { font-size: 10px; }
+  .quotation-table { font-size: 10px; }
+  .quotation-table th, .quotation-table td { padding: 4px 5px; }
+
+  .totals { flex-direction: column; }
+  .warranty { border-right: none; border-bottom: 1.5px solid #bbb; }
+
+  .signature-container { flex-direction: column; gap: 10px; }
+  #gst_no { text-align: left; }
+}
