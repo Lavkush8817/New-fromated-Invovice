@@ -3,157 +3,493 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tax Invoice – A&S Engineering Services</title>
-  <meta name="description" content="Tax Invoice for A&S Engineering Services, Singrauli MP.">
+  <title>A&S ERP - Business Dashboard</title>
+  <meta name="description" content="Dashboard and Billing Platform for A&S Engineering Services.">
   <link rel="icon" type="image/png" href="Anslogo.png">
   <link rel="stylesheet" href="style.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
-  <div class="invoice-container">
+  <!-- Sidebar Overlay (for responsive drawers) -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-    <!-- ═══ HEADER ═══ -->
-    <div class="header">
-      <img src="Anslogo.png" id="logo" alt="A&S Logo">
-      <div class="company-info">
-        <h1>A&amp;S ENGINEERING SERVICES</h1>
-        <p>ADD-WARD NO 12, SAHOKHAR, KHUTAR, POST -KHUTAR, WAIDHAN SINGRAULI (MP)</p>
-        <p>PIN CODE 486886 &nbsp;|&nbsp; PH: 7974694107 &nbsp;|&nbsp; Email: asengineeringservices41wn@gmail.com</p>
+  <div class="app-container">
+    
+    <!-- ═══ LEFT SIDEBAR ═══ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <img src="Anslogo.png" alt="A&S ERP" class="brand-logo">
+        <span class="brand-name">A&S ERP</span>
       </div>
-    </div>
-
-    <!-- ═══ TAX INVOICE BAND ═══ -->
-    <div class="quotation">
-      <h2 id="h2">TAX INVOICE</h2>
-      <hr id="quotation_bottum_line">
-    </div>
-
-    <!-- ═══ REF / DATE ═══ -->
-    <div class="quotation-info">
-      <p>REF. NO :&nbsp;<input type="text" placeholder="EE/VJ/APRL-2024/01" id="ref"></p>
-      <p>Date:&nbsp;<input id="date" type="date"></p>
-    </div>
-    <div class="doc-no-row">
-      <p>Doc. No :&nbsp;<input type="text" placeholder="DOC-001" id="docNo"></p>
-    </div>
-
-    <!-- ═══ CUSTOMER INFO ═══ -->
-    <div class="customer-info">
-      <textarea id="customer-info" name="customerDetails"
-        placeholder="Enter Customer Details: Name, Address, GSTIN, etc."
-        required oninput="autoGrow(this)"></textarea>
-    </div>
-
-    <!-- ═══ ITEMS TABLE ═══ -->
-    <table class="quotation-table">
-      <thead>
-        <tr>
-          <th>Sr. No.</th>
-          <th>Description of Goods / Services</th>
-          <th>HSN CODE</th>
-          <th id="qty">Qty.</th>
-          <th id="unitPrice">Unit Price (₹)</th>
-          <th>Amount (₹)</th>
-        </tr>
-      </thead>
-      <tbody id="quotation-body">
-        <tr>
-          <td>1</td>
-          <td contenteditable="true">VAJRA ROCK BREAKER HD+ WITH PIPELINE AND ALL ASSOSEEERASE.</td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true" oninput="calculateTotal()">1</td>
-          <td contenteditable="true" oninput="calculateTotal()"></td>
-          <td class="totalAmount">0.00</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- ═══ BUTTONS ═══ -->
-    <div class="button-container">
-      <button id="btns" class="add-row-btn" onclick="addRow()">+ Add Row</button>
-      <button id="btns" class="remove-row-btn" onclick="removeRow()">− Remove Row</button>
-      <button id="btns" class="print-btn" onclick="window.print()">🖨 Print</button>
-    </div>
-
-    <!-- ═══ TOTALS SECTION ═══ -->
-    <div class="totals">
-      <div class="warranty">
-        <textarea id="Warranty"
-          placeholder="WARRANTY: One Year only. Warranty claim will be made only on manufacturing default."></textarea>
-      </div>
-      <div class="amounts">
-        <p>
-          <pre id="sub">Sub Total: </pre>
-          <span id="subTotal">0.00</span>
-        </p>
-        <p>
-          <span>CGST: <input type="number" id="cgstRate" value="9" oninput="calculateTotal()" class="GST"> %</span>
-          <span>₹ <span id="cgstAmount">0.00</span></span>
-        </p>
-        <p>
-          <span>SGST: <input type="number" id="sgstRate" value="9" oninput="calculateTotal()" class="GST"> %</span>
-          <span>₹ <span id="sgstAmount">0.00</span></span>
-        </p>
-
-        <hr id="grand_total">
-        <p>
-          <span>Grand Total:</span>
-          <strong>₹ <span id="grandTotal">0.00</span></strong>
-        </p>
-      </div>
-    </div>
-
-    <!-- ═══ SIGNATURE ═══ -->
-    <div class="signature-container">
-      <div class="signature">
-        <p>For; A&amp;S ENGINEERING SERVICES</p>
-        <img id="singh" src="singh.png" alt="Authorized Signatory">
-        <p>Stamp / Authorized Signatory</p>
-      </div>
-      <div id="gst_no">
-        <p>GST No : 23CXLPD3404M1ZL</p>
-        <p>PAN No : CXLPD3404M</p>
-      </div>
-    </div>
-
-    <hr id="footer_line">
-
-    <!-- ═══ TERMS & CONDITIONS ═══ -->
-    <div class="footer">
-      <ol id="Termscoditons">
-        <h4>Terms &amp; Conditions:</h4>
-        <li>Taxes as stated, all other taxes and changes in tax structure by Government will be applicable at the time of billing.</li>
-        <li>Freight &amp; Insurance: From Waidhan, Singrauli (MP) to the site, both to be borne by the customer.</li>
-        <li>Delivery within 1-2 weeks from the date of receipt of DO, purchase order and full payment.</li>
-        <li>Our offer is valid for 15 days from the date mentioned above; prices ruling at the time of delivery shall be applicable.</li>
-        <li>100% Payment to be released prior to dispatch of equipment.</li>
-        <li>PAN No. &amp; GST No. is required at the time of placement of order as per Govt. Rules.</li>
-        <li>Any dispute or claims out of this invoice will be subjected to the jurisdiction of court in Singrauli.</li>
-      </ol>
-    </div>
-
-    <!-- ═══ PAYMENT FOOTER ═══ -->
-    <div class="payment-footer">
-      <div class="payment-info">
-        <p class="pf-heading">Payment Info:</p>
-        <p><span class="pf-label">Beneficiary Name :</span> A&amp;S ENGINEERING SERVICES</p>
-        <p><span class="pf-label">Bank Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span> UNION BANK OF INDIA</p>
-        <p><span class="pf-label">Account Number :</span> 452501010033664</p>
-        <p><span class="pf-label">Branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span> SANJAY NAGAR, SINGRAULI</p>
-        <p><span class="pf-label">IFSC Code &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span> UBIN0545252</p>
-      </div>
-      <div class="payment-accent">
-        <div class="pa-stripe pa-stripe-1"></div>
-        <div class="pa-stripe pa-stripe-2"></div>
-        <div class="pa-contact">
-          <p>📧 asengineeringservices41wn@gmail.com</p>
-          <p>📞 7974694107</p>
-          <p>GST : 23CXLPD3404M1ZL</p>
+      <nav class="sidebar-menu">
+        <button class="menu-item active" data-view="dashboard">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="menu-item" data-view="invoices">
+          <i data-lucide="file-text"></i>
+          <span>Invoices</span>
+        </button>
+        <button class="menu-item" data-view="quotations">
+          <i data-lucide="file-spreadsheet"></i>
+          <span>Quotations</span>
+        </button>
+        <button class="menu-item" data-view="bills">
+          <i data-lucide="receipt"></i>
+          <span>Bills</span>
+        </button>
+        
+        <div class="menu-divider"></div>
+        
+        <div class="menu-item disabled">
+          <i data-lucide="users"></i>
+          <span>Customers <span class="badge-soon">Soon</span></span>
         </div>
+        <div class="menu-item disabled">
+          <i data-lucide="package"></i>
+          <span>Products <span class="badge-soon">Soon</span></span>
+        </div>
+        <div class="menu-item disabled">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Reports <span class="badge-soon">Soon</span></span>
+        </div>
+        
+        <div class="menu-divider"></div>
+        
+        <button class="menu-item" data-view="settings">
+          <i data-lucide="settings"></i>
+          <span>Settings</span>
+        </button>
+        <button class="menu-item" data-view="help">
+          <i data-lucide="help-circle"></i>
+          <span>Help</span>
+        </button>
+      </nav>
+    </aside>
+
+    <!-- ═══ RIGHT CONTENT CONTAINER ═══ -->
+    <div class="content-container">
+      
+      <!-- ═══ TOP HEADER ═══ -->
+      <header class="top-header no-print">
+        <div class="header-left">
+          <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle Sidebar">
+            <i data-lucide="menu"></i>
+          </button>
+          <div class="search-bar-container">
+            <i data-lucide="search" class="search-icon"></i>
+            <input type="text" placeholder="Search invoices, quotations, bills or customers..." id="global-search">
+            <span class="search-shortcut">⌘ K</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="current-date-container">
+            <i data-lucide="calendar"></i>
+            <span id="header-date">Friday, July 11, 2026</span>
+          </div>
+          <button class="icon-btn notification-btn" aria-label="Notifications">
+            <i data-lucide="bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <button class="icon-btn settings-btn" aria-label="Settings">
+            <i data-lucide="settings"></i>
+          </button>
+          <div class="profile-avatar">
+            <span>AS</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ═══ MAIN CONTENT ═══ -->
+      <main class="main-content">
+        
+        <!-- ─── VIEW: DASHBOARD ─── -->
+        <section id="dashboard-view" class="view-section">
+          
+          <!-- Welcome Bar -->
+          <div class="welcome-section">
+            <span class="welcome-text">Good Morning,</span>
+            <h1 class="company-name-title">A&S Engineering Services</h1>
+            <p class="welcome-subtitle">Here's today's business summary.</p>
+          </div>
+
+          <!-- Summary Stats Grid -->
+          <div class="summary-cards">
+            <div class="summary-card" data-filter="all">
+              <div class="card-icon-wrapper icon-blue">
+                <i data-lucide="file-text"></i>
+              </div>
+              <div class="card-content">
+                <span class="card-title">TOTAL DOCUMENTS</span>
+                <h2 class="card-value" id="stat-total">126</h2>
+                <span class="card-subtext">All your documents</span>
+              </div>
+              <i data-lucide="chevron-right" class="card-arrow"></i>
+            </div>
+            
+            <div class="summary-card" data-filter="invoice">
+              <div class="card-icon-wrapper icon-blue">
+                <i data-lucide="file-check"></i>
+              </div>
+              <div class="card-content">
+                <span class="card-title">TAX INVOICES</span>
+                <h2 class="card-value" id="stat-invoices">58</h2>
+                <span class="card-subtext">View all invoices</span>
+              </div>
+              <i data-lucide="chevron-right" class="card-arrow"></i>
+            </div>
+
+            <div class="summary-card" data-filter="quotation">
+              <div class="card-icon-wrapper icon-green">
+                <i data-lucide="file-signature"></i>
+              </div>
+              <div class="card-content">
+                <span class="card-title">QUOTATIONS</span>
+                <h2 class="card-value" id="stat-quotations">34</h2>
+                <span class="card-subtext">View all quotations</span>
+              </div>
+              <i data-lucide="chevron-right" class="card-arrow"></i>
+            </div>
+
+            <div class="summary-card" data-filter="bill">
+              <div class="card-icon-wrapper icon-orange">
+                <i data-lucide="receipt"></i>
+              </div>
+              <div class="card-content">
+                <span class="card-title">BILLS</span>
+                <h2 class="card-value" id="stat-bills">34</h2>
+                <span class="card-subtext">View all bills</span>
+              </div>
+              <i data-lucide="chevron-right" class="card-arrow"></i>
+            </div>
+          </div>
+
+          <!-- Quick Actions Grid -->
+          <div class="section-container" style="margin-top: 32px;">
+            <h3 class="section-title">Quick Actions</h3>
+            <div class="quick-actions-grid">
+              <div class="action-card action-invoice">
+                <div class="action-icon-container">
+                  <i data-lucide="file-check"></i>
+                </div>
+                <div class="action-info">
+                  <h4 class="action-title">Tax Invoice</h4>
+                  <p class="action-desc">Create a new tax invoice</p>
+                </div>
+                <button class="btn btn-primary create-doc-btn" data-type="invoice">Create Invoice</button>
+              </div>
+
+              <div class="action-card action-quotation">
+                <div class="action-icon-container">
+                  <i data-lucide="file-signature"></i>
+                </div>
+                <div class="action-info">
+                  <h4 class="action-title">Quotation</h4>
+                  <p class="action-desc">Create a new quotation</p>
+                </div>
+                <button class="btn btn-success create-doc-btn" data-type="quotation">Create Quotation</button>
+              </div>
+
+              <div class="action-card action-bill">
+                <div class="action-icon-container">
+                  <i data-lucide="receipt"></i>
+                </div>
+                <div class="action-info">
+                  <h4 class="action-title">Bill</h4>
+                  <p class="action-desc">Create a new bill</p>
+                </div>
+                <button class="btn btn-warning create-doc-btn" data-type="bill">Create Bill</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Documents Table -->
+          <div class="section-container" style="margin-top: 32px;">
+            <div class="section-header-row">
+              <h3 class="section-title">Recent Documents</h3>
+              <div class="table-tabs" id="recent-tabs">
+                <button class="tab-btn active" data-tab="all">All</button>
+                <button class="tab-btn" data-tab="invoice">Tax Invoices</button>
+                <button class="tab-btn" data-tab="quotation">Quotations</button>
+                <button class="tab-btn" data-tab="bill">Bills</button>
+              </div>
+            </div>
+            
+            <div class="table-wrapper">
+              <table class="documents-table">
+                <thead>
+                  <tr>
+                    <th>DOC NUMBER</th>
+                    <th>TYPE</th>
+                    <th>CUSTOMER</th>
+                    <th>AMOUNT (₹)</th>
+                    <th>DATE</th>
+                    <th>STATUS</th>
+                    <th>ACTIONS</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-documents-body">
+                  <!-- JS Rendered rows -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="bottom-action-row">
+              <button class="view-all-btn" id="view-all-docs-btn">
+                View All Documents <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ─── VIEW: DOCUMENTS LIST ─── -->
+        <section id="documents-view" class="view-section" style="display: none;">
+          <div class="documents-header">
+            <div class="documents-title-row">
+              <h1 class="company-name-title">All Documents</h1>
+              <p class="welcome-subtitle">Search, filter, and manage your invoices, quotations, and bills.</p>
+            </div>
+            <div class="documents-controls">
+              <div class="search-input-wrapper">
+                <i data-lucide="search"></i>
+                <input type="text" placeholder="Search customer, number..." id="documents-search">
+              </div>
+              <div class="table-tabs" id="documents-tabs">
+                <button class="tab-btn active" data-tab="all">All</button>
+                <button class="tab-btn" data-tab="invoice">Invoices</button>
+                <button class="tab-btn" data-tab="quotation">Quotations</button>
+                <button class="tab-btn" data-tab="bill">Bills</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="documents-table">
+              <thead>
+                <tr>
+                  <th>DOC NUMBER</th>
+                  <th>TYPE</th>
+                  <th>CUSTOMER</th>
+                  <th>AMOUNT (₹)</th>
+                  <th>DATE</th>
+                  <th>STATUS</th>
+                  <th>ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody id="all-documents-body">
+                <!-- JS Rendered rows -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ─── VIEW: INVOICE GENERATOR FORM ─── -->
+        <section id="invoice-view" class="view-section" style="display: none;">
+          <div class="form-header-row no-print">
+            <button class="back-btn" id="back-to-dashboard-btn">
+              <i data-lucide="arrow-left"></i> Back to Dashboard
+            </button>
+            <div class="form-title-badge">
+              <span id="form-type-label">TAX INVOICE</span>
+            </div>
+          </div>
+
+          <!-- Original Invoice Container -->
+          <div class="invoice-container">
+
+            <!-- Header -->
+            <div class="header">
+              <img src="Anslogo.png" id="logo" alt="A&S Logo">
+              <div class="company-info">
+                <h1>A&amp;S ENGINEERING SERVICES</h1>
+                <p>ADD-WARD NO 12, SAHOKHAR, KHUTAR, POST -KHUTAR, WAIDHAN SINGRAULI (MP)</p>
+                <p>PIN CODE 486886 &nbsp;|&nbsp; PH: 7974694107 &nbsp;|&nbsp; Email: asengineeringservices41wn@gmail.com</p>
+              </div>
+            </div>
+
+            <!-- Tax Invoice Band -->
+            <div class="quotation">
+              <h2 id="h2">TAX INVOICE</h2>
+              <hr id="quotation_bottum_line">
+            </div>
+
+            <!-- Ref / Date -->
+            <div class="quotation-info">
+              <p>REF. NO :&nbsp;<input type="text" placeholder="EE/VJ/APRL-2024/01" id="ref"></p>
+              <p>Date:&nbsp;<input id="date" type="date"></p>
+            </div>
+            <div class="doc-no-row">
+              <p>Doc. No :&nbsp;<input type="text" placeholder="DOC-001" id="docNo"></p>
+            </div>
+
+            <!-- Customer Info -->
+            <div class="customer-info">
+              <textarea id="customer-info" name="customerDetails"
+                placeholder="Enter Customer Details: Name, Address, GSTIN, etc."
+                required oninput="autoGrow(this)"></textarea>
+            </div>
+
+            <!-- Items Table -->
+            <table class="quotation-table">
+              <thead>
+                <tr>
+                  <th>Sr. No.</th>
+                  <th>Description of Goods / Services</th>
+                  <th>HSN CODE</th>
+                  <th id="qty">Qty.</th>
+                  <th id="unitPrice">Unit Price (₹)</th>
+                  <th>Amount (₹)</th>
+                </tr>
+              </thead>
+              <tbody id="quotation-body">
+                <tr>
+                  <td>1</td>
+                  <td contenteditable="true">VAJRA ROCK BREAKER HD+ WITH PIPELINE AND ALL ASSOSEEERASE.</td>
+                  <td contenteditable="true"></td>
+                  <td contenteditable="true" oninput="calculateTotal()">1</td>
+                  <td contenteditable="true" oninput="calculateTotal()"></td>
+                  <td class="totalAmount">0.00</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Actions Row -->
+            <div class="button-container">
+              <button id="btns" class="add-row-btn" onclick="addRow()">+ Add Row</button>
+              <button id="btns" class="remove-row-btn" onclick="removeRow()">− Remove Row</button>
+              <button id="btns" class="print-btn" onclick="window.print()">🖨 Print</button>
+              <button id="btns" class="save-btn no-print" onclick="saveCurrentDocument()">💾 Save Document</button>
+            </div>
+
+            <!-- Totals Section -->
+            <div class="totals">
+              <div class="warranty">
+                <textarea id="Warranty"
+                  placeholder="WARRANTY: One Year only. Warranty claim will be made only on manufacturing default."></textarea>
+              </div>
+              <div class="amounts">
+                <p>
+                  <pre id="sub">Sub Total: </pre>
+                  <span id="subTotal">0.00</span>
+                </p>
+                <p>
+                  <span>CGST: <input type="number" id="cgstRate" value="9" oninput="calculateTotal()" class="GST"> %</span>
+                  <span>₹ <span id="cgstAmount">0.00</span></span>
+                </p>
+                <p>
+                  <span>SGST: <input type="number" id="sgstRate" value="9" oninput="calculateTotal()" class="GST"> %</span>
+                  <span>₹ <span id="sgstAmount">0.00</span></span>
+                </p>
+
+                <hr id="grand_total">
+                <p>
+                  <span>Grand Total:</span>
+                  <strong>₹ <span id="grandTotal">0.00</span></strong>
+                </p>
+              </div>
+            </div>
+
+            <!-- Signature -->
+            <div class="signature-container">
+              <div class="signature">
+                <p>For; A&amp;S ENGINEERING SERVICES</p>
+                <img id="singh" src="singh.png" alt="Authorized Signatory">
+                <p>Stamp / Authorized Signatory</p>
+              </div>
+              <div id="gst_no">
+                <p>GST No : 23CXLPD3404M1ZL</p>
+                <p>PAN No : CXLPD3404M</p>
+              </div>
+            </div>
+
+            <hr id="footer_line">
+
+            <!-- Terms & Conditions -->
+            <div class="footer">
+              <ol id="Termscoditons">
+                <h4>Terms &amp; Conditions:</h4>
+                <li>Taxes as stated, all other taxes and changes in tax structure by Government will be applicable at the time of billing.</li>
+                <li>Freight &amp; Insurance: From Waidhan, Singrauli (MP) to the site, both to be borne by the customer.</li>
+                <li>Delivery within 1-2 weeks from the date of receipt of DO, purchase order and full payment.</li>
+                <li>Our offer is valid for 15 days from the date mentioned above; prices ruling at the time of delivery shall be applicable.</li>
+                <li>100% Payment to be released prior to dispatch of equipment.</li>
+                <li>PAN No. &amp; GST No. is required at the time of placement of order as per Govt. Rules.</li>
+                <li>Any dispute or claims out of this invoice will be subjected to the jurisdiction of court in Singrauli.</li>
+              </ol>
+            </div>
+
+            <!-- Payment Footer -->
+            <div class="payment-footer">
+              <div class="payment-info">
+                <p class="pf-heading">Payment Info:</p>
+                <p><span class="pf-label">Beneficiary Name :</span> A&amp;S ENGINEERING SERVICES</p>
+                <p><span class="pf-label">Bank Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span> UNION BANK OF INDIA</p>
+                <p><span class="pf-label">Account Number :</span> 452501010033664</p>
+                <p><span class="pf-label">Branch &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span> SANJAY NAGAR, SINGRAULI</p>
+                <p><span class="pf-label">IFSC Code &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span> UBIN0545252</p>
+              </div>
+              <div class="payment-accent">
+                <div class="pa-stripe pa-stripe-1"></div>
+                <div class="pa-stripe pa-stripe-2"></div>
+                <div class="pa-contact">
+                  <p>📧 asengineeringservices41wn@gmail.com</p>
+                  <p>📞 7974694107</p>
+                  <p>GST : 23CXLPD3404M1ZL</p>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /.invoice-container -->
+        </section>
+
+        <!-- ─── VIEW: SETTINGS ─── -->
+        <section id="settings-view" class="view-section" style="display: none;">
+          <div class="welcome-section">
+            <h1 class="company-name-title">Settings</h1>
+            <p class="welcome-subtitle">Configure application settings and defaults.</p>
+          </div>
+          <div class="table-wrapper" style="padding: 24px;">
+            <p style="font-size: 14px; color: var(--text-muted);">Settings are coming soon. The settings system will allow customization of company details, default GST rates, bank accounts, and print configurations.</p>
+          </div>
+        </section>
+
+        <!-- ─── VIEW: HELP ─── -->
+        <section id="help-view" class="view-section" style="display: none;">
+          <div class="welcome-section">
+            <h1 class="company-name-title">Help & Support</h1>
+            <p class="welcome-subtitle">Get help with A&S ERP Billing platform.</p>
+          </div>
+          <div class="table-wrapper" style="padding: 24px;">
+            <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">Need help? You can contact A&S Engineering Services support.</p>
+            <p style="font-size: 13px;">📧 <strong>Email:</strong> asengineeringservices41wn@gmail.com</p>
+            <p style="font-size: 13px;">📞 <strong>Phone:</strong> +91 7974694107</p>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Custom Confirmation Modal -->
+  <div class="modal-overlay" id="confirm-modal">
+    <div class="modal-card">
+      <div class="modal-icon-wrapper">
+        <i data-lucide="alert-triangle"></i>
+      </div>
+      <h3 class="modal-title">Delete Document</h3>
+      <p class="modal-desc">Are you sure you want to delete this document? This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn" id="confirm-cancel-btn">Cancel</button>
+        <button class="btn btn-danger" id="confirm-delete-btn">Delete</button>
       </div>
     </div>
+  </div>
 
-  </div><!-- /.invoice-container -->
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
 
   <script src="script.js"></script>
   <script>
